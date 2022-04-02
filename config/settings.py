@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 # GENERAL
@@ -26,13 +27,14 @@ INSTALLED_APPS = [
 
     # Third-party
     'allauth',
-    'allauth.account',
+    #'allauth.account',
     'crispy_forms',
     'debug_toolbar',
 
     # Local
     'accounts',
-    'pages',
+    #'pages',
+    'services',
 ]
 
 # MIDDLEWARE
@@ -156,9 +158,9 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/'
 # https://django-allauth.readthedocs.io/en/latest/views.html#logout-account-logout
-ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 # https://django-allauth.readthedocs.io/en/latest/installation.html?highlight=backends
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
@@ -171,3 +173,11 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+
+#STATIC_URL = "/static/"
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
