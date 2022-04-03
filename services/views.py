@@ -1,3 +1,4 @@
+from importlib.metadata import files
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import *
 from . forms import *
@@ -26,4 +27,18 @@ def become_a_member(request):
         membership_form = BecomAMemberForm()
     return render(request, 'pages/become-a-memebr.html', {
         "membership_form": membership_form
+    })
+
+
+def help_desk(request):
+    if request.method == 'POST':
+        help_desk_form = HelpDeskForm(data=request.POST, files=request.FILES)
+        if help_desk_form.is_valid():
+            help_desk_form.save()
+            return redirect("/")
+    else:
+        help_desk_form = HelpDeskForm()
+    
+    return render(request, 'pages/help-desk.html', {
+        "help_desk_form":help_desk_form
     })

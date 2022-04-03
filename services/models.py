@@ -1,5 +1,7 @@
 from distutils.command.upload import upload
 from importlib.metadata import requires
+from pyexpat import model
+from random import choices
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.forms import SlugField
@@ -13,6 +15,14 @@ MEMBERSHIP_STATUS = (
     ("Graduate/NSP", "Graduate/NSP"),
     ("Postgraduate/Schooling","Postgraduate/Schooling"),
     ("Alumni", "Alumni")
+)
+
+ISSUES = (
+    ("Welfare", "Welfare"),
+    ("Academic", "Academic"),
+    ("Isses with Hall/Hostel", "Isses with Hall/Hostel"),
+    ("Report Abuse", "Report Abuse"),
+    ("Other", "Other")
 )
 
 class Member(models.Model):
@@ -54,3 +64,14 @@ class Post(models.Model):
         if not self.slug:
             self.slug = slugify(f"{self.title}")
         super().save(*args, **kwargs)
+
+
+class Helpdesk(models.Model):
+    issue = models.CharField(choices=ISSUES, max_length=50)
+    content = models.TextField()
+    email_or_phone = models.CharField(max_length=50, blank=True, null=True)
+    
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.issue
