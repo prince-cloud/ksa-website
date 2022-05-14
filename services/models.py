@@ -75,3 +75,10 @@ class Helpdesk(models.Model):
 
     def __str__(self) -> str:
         return self.issue
+    
+
+class Gallery(models.Model):
+    image = models.ImageField(upload_to='Gallery')
+
+    def __str__(self) -> str:
+        return self.image

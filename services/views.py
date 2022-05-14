@@ -42,3 +42,12 @@ def help_desk(request):
     return render(request, 'pages/help-desk.html', {
         "help_desk_form":help_desk_form
     })
+
+def gallery(request):
+    images = Gallery.objects.all()
+    return render(request, 'pages/gallery.html', {
+        "images": images
+    })
+
+def contact_us(request):
+    return render(request, 'pages/contact_us.html')
