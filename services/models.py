@@ -2,10 +2,12 @@ from distutils.command.upload import upload
 from importlib.metadata import requires
 from pyexpat import model
 from random import choices
+from turtle import position
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.forms import SlugField
 from django.utils.text import slugify
+from ckeditor.fields import RichTextField
 
 User = get_user_model()
 # Create your models here.
@@ -24,6 +26,40 @@ ISSUES = (
     ("Report Abuse", "Report Abuse"),
     ("Other", "Other")
 )
+
+class Position (models.Model):
+    position = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ("position", )
+    def __str__(self) -> str:
+        return self.position
+
+class YearGroup(models.Model):
+    year = models.CharField(max_length=50)
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("-date_created",)
+    def __str__(self) -> str:
+        return self.year
+
+class Executive(models.Model):
+    year = models.ForeignKey(YearGroup, max_length=100, on_delete=models.SET_NULL, null=True, related_name="executives")
+    name = models.CharField(max_length=200)
+    position = models.ForeignKey(Position, on_delete=models.SET_NULL, null=True)
+    profile_pic = models.ImageField(upload_to="profile/")
+    phone_number = models.CharField(max_length=14)
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("name",)
+
+    def __str__(self) -> str:
+        return self.name
+
 
 class Member(models.Model):
     full_name = models.CharField(max_length=100)
@@ -49,13 +85,16 @@ class Post(models.Model):
     posted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     title = models.CharField(max_length=100)
     title_image = models.ImageField(upload_to="posts_images/")
-    content = models.CharField(max_length=200)
+    content = RichTextField()
 
-    multiple_images = models.ForeignKey(PostImage, on_delete=models.SET_NULL, null=True, blank=True, related_name="posts")
+    multiple_images = models.ForeignKey(PostImage, on_delete=models.SET_NULL, null=True, blank=True, related_name="images")
     slug = models.SlugField(blank=True, null=True)
 
 
     date_posted = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("-date_posted",)
 
     def __str__(self) -> str:
         return self.title

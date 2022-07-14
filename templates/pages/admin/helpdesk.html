@@ -1,0 +1,36 @@
+{% extends '_base.html' %}
+
+{% block title %}Admin | Help Desk {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="pt-lg-5 pt-5 mt-lg-5 mt-5 "></div>
+
+    <h1>Help desk</h1>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr class="bg-dark text-white">
+                    <th scope="col">#</th>
+                    <th scope="col">Issue</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Email / Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for help in helps %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ help.issue }}</td>
+                    <td>{{ help.content }}</td>
+                    <td>{{ help.email_or_phone }}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock content %}

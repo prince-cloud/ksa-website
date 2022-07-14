@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+{% load static %}
+<!-- % load crispy_template_tags %} -->
+{% block title %}Admin | Add Post {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="pt-lg-5 pt-5 mt-lg-5 mt-5 "></div>
+
+    <h1>Gallery</h1>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form method="post" enctype="multipart/form-data" style="width: 100%;">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+
+                <input type="Submit" class="btn btn-md btn-success" value="Post">
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

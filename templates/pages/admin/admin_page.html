@@ -1,0 +1,64 @@
+{% extends '_base.html' %}
+{% block title %}Admin {% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="pt-lg-5 pt-5 mt-lg-5 mt-5 "></div>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="{% url 'services:posts' %}" class="card mb-4">
+                <div class="card-body">
+                    <h2>Posts</h2>
+                    all Posts
+                </div>
+                <div class="card-footer">
+                    {{ posts.count }} Posts
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'services:members' %}" class="card mb-4">
+                <div class="card-body">
+                    <h2>Members</h2>
+                    Newly registered members
+                </div>
+                <div class="card-footer">
+                    {{ members.count }} Members
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'services:ksaHelpDesk' %}" class="card mb-4">
+                <div class="card-body">
+                    <h2>Help Desk</h2>
+                    Check latest message
+                </div>
+                <div class="card-footer">
+                    {{ helps.count }} New help request
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="" class="card mb-4">
+                <div class="card-body">
+                    <h2>Gallery</h2>
+                    Check latest message
+                </div>
+                <div class="card-footer">
+                    {{ gallery.count }} images posted
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'services:executives' %}" class="card mb-4">
+                <div class="card-body">
+                    <h2>Executives</h2>
+                    The executives
+                </div>
+                <div class="card-footer">
+                    {{ yeargroup.count }} batches
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

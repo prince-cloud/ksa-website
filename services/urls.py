@@ -6,6 +6,15 @@ from django.contrib.auth.views import LoginView, LogoutView
 app_name = 'services'
 
 urlpatterns = [
+    ## admin page
+    path("secrete-route/", views.secrete_route, name = "secrete_route"),
+    path("executives/", views.executives, name = "executives"),
+    path("members/", views.members, name = "members"),
+    path("help-desk/ksa/", views.ksaHelpDesk, name = "ksaHelpDesk"),
+    path("posts/", views.posts, name = "posts"),
+    path("add-posts/", views.add_post, name = "add_post"),
+
+    ## other pages
     path("", views.index, name="index"),
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),

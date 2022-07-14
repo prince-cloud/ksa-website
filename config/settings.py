@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'accounts',
     #'pages',
     'services',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 # MIDDLEWARE
@@ -181,3 +183,5 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+CKEDITOR_UPLOAD_PATH = "media/uploads/"

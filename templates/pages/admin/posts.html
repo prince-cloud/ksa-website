@@ -1,0 +1,43 @@
+{% extends '_base.html' %}
+
+{% block title %}Admin | Posts {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="pt-lg-5 pt-5 mt-lg-5 mt-5 "></div>
+
+    <h1>Posts</h1>
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <a class="btn btn-sm btn-info" href="{% url 'services:add_post' %}">
+                New Post
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr class="bg-dark text-white">
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ post.date_posted }}</td>
+                    <td>{{ post.title}}</td>
+                    <td><a href="{% url 'services:post-detail' post.slug %}">read</a></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock content %}
