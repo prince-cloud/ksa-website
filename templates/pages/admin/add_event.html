@@ -1,0 +1,32 @@
+{% extends '_base.html' %}
+{% load static %}
+<!-- % load crispy_template_tags %} -->
+{% block title %}Admin | Add Event {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="pt-lg-5 pt-5 mt-lg-5 mt-5 "></div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div>
+                <h2>
+                    Add New Event
+                </h2>
+            </div>
+            <hr>
+            <form method="post" enctype="multipart/form-data" style="width: 100%;">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <input type="Submit" class="btn btn-md btn-success" value="Save">
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

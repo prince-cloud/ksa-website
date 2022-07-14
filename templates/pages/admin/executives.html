@@ -3,6 +3,20 @@
 {% block content %}
 <div class="container mt-5">
     <div class="pt-lg-5 pt-5 mt-lg-5 mt-5 "></div>
+
+    <h1>Executives</h1>
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <a class="btn btn-sm btn-info" href="{% url 'services:add_executive' %}">
+                Add Executives
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-sm btn-info" href="{% url 'services:add_yeargroup' %}">
+                Add Year Group
+            </a>
+        </div>
+    </div>
     {% for yeargroup in yeargroups %}
     <div class="text-center">
         <h3> {{ yeargroup }} Executives </h3>

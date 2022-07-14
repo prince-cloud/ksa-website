@@ -1,0 +1,88 @@
+{% extends '_base.html' %}
+
+{% block title %}Admin | Events {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="pt-lg-5 pt-5 mt-lg-5 mt-5 "></div>
+
+    <h1>events</h1>
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <a class="btn btn-sm btn-info" href="{% url 'services:add_event' %}">
+                New Event
+            </a>
+        </div>
+    </div>
+    <h3>
+        Upcoming Events
+    </h3>
+    <hr>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr class="bg-dark text-white">
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ event.date}}</td>
+                    <td>{{ event.time}}</td>
+                    <td>{{ event.title }}</td>
+                    <td>
+                        {{ event.short_description }}
+                    </td>
+                    <td>
+                        <a href="{% url 'services:delete_event' event.id %}" class="text-danger">delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <h3>
+        Outdated Events
+    </h3>
+    <hr>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr class="bg-dark text-white">
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in outdated_events %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ event.date}}</td>
+                    <td>{{ event.time}}</td>
+                    <td>{{ event.title }}</td>
+                    <td>
+                        {{ event.short_description }}
+                    </td>
+                    <td>
+                        <a href="{% url 'services:delete_event' event.id %}" class="text-danger">delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock content %}

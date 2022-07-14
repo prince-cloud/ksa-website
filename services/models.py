@@ -115,9 +115,27 @@ class Helpdesk(models.Model):
     def __str__(self) -> str:
         return self.issue
     
+class Event(models.Model):
+    title = models.CharField(max_length=200)
+    short_description = models.CharField(max_length=200)
+    date = models.DateField()
+    time = models.TimeField()
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.title
+
 
 class Gallery(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.SET_NULL, null=True, related_name="images", blank=True)
     image = models.ImageField(upload_to='Gallery')
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("-date_created",)
 
     def __str__(self) -> str:
         return self.image
+

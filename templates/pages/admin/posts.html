@@ -29,8 +29,11 @@
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ post.date_posted }}</td>
-                    <td>{{ post.title}}</td>
-                    <td><a href="{% url 'services:post-detail' post.slug %}">read</a></td>
+                    <td>{{ post.title }}</td>
+                    <td>
+                        <a href="{% url 'services:post-detail' post.slug %}">read</a>
+                        <a href="{% url 'services:delete-post' post.id %}" class="text-danger text-bolder">delete</a>
+                    </td>
                 </tr>
                 {% endfor %}
 

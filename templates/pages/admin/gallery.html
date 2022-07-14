@@ -1,9 +1,118 @@
 {% extends '_base.html' %}
 
-{% block title %}Admin | Gallery {% endblock %}
+{% block title %}Admin | Help Desk {% endblock %}
 
 {% block content %}
 <div class="container">
-    <h1>Gallery</h1>
+  <div class="pt-lg-5 pt-5 mt-lg-5 mt-5 "></div>
+
+  <h1>Gallery</h1>
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <a class="btn btn-sm btn-info" href="{% url 'services:upload_gallery_images' %}">
+        New Image
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    {% for image in images %}
+    <div class="col-md-4 grid mb-2">
+      <img class="card" src="{{ image.image.url }}" alt="people" style="object-fit: contain; width: 100%;">
+      <a id="delImage" href="{% url 'services:delete_gallery_image' image.id %}" class="text-decoration-none">
+        a Delete
+        <span class="badge badge-danger position-absolute m-0 top bg-danger"
+          style="z-index: 2; right: 10px; top: 10px;">
+          delete
+          <i class="mdi mdi-delete text-white"></i>
+        </span>
+      </a>
+
+    </div>
+    <script>
+      let dele_btton = document.getElementById("delImage")
+      if (dele_btton) {
+
+        dele_btton.addEventListener('click', (e) => {
+          if (!confirm("Are you sure you want to delete.\nAction cannot be reversed")) {
+            e.preventDefault();
+          }
+        });
+      }
+    </script>
+
+    {% endfor %}
+  </div>
+
 </div>
+
 {% endblock content %}
+
+
+
+
+
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="container mb-3">
+        <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+          Upload Image
+        </button>
+
+        </button>
+      </div>
+      <div class="row">
+        {% for image in images %}
+        <div class="col-md-4 grid mb-2">
+          <img class="card" src="{{ image.image.url }}" alt="people" style="object-fit: contain; width: 100%;">
+          <a id="delImage" href="{% url 'services:delete_gallery_image' image.id %}" class="text-decoration-none">
+            <span class="badge badge-danger position-absolute m-0 top" style="z-index: 2; right: 10px; top: 10px;"> <i
+                class="mdi mdi-delete text-white"></i>
+            </span>
+          </a>
+
+        </div>
+        <script>
+          let delete_btton = document.getElementById("delImage")
+          if (delete_btton) {
+
+            delete_btton.addEventListener('click', (e) => {
+              if (!confirm("Are you sure you want to delete.\nAction cannot be reversed")) {
+                e.preventDefault();
+              }
+            });
+          }
+        </script>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Evnet Type -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Review Form</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'services:upload_gallery_images' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ upload_image_form }}
+            <div class="form-group mt-3">
+              <input type="submit" value="Save" class="btn btn-primary mr-2">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

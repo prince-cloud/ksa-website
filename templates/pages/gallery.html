@@ -4,6 +4,33 @@
 
 {% block content %}
 <div class="container">
+    <div class="pt-lg-5 pt-5 mt-lg-5 mt-5 "></div>
+
     <h1>Gallery</h1>
+
+    {% for event in events %}
+    <div class="row text-center">
+        <h3> {{ event.title }} </h3>
+
+        {% for image in event.images.all %}
+        <div class="col-md-4 grid mb-2">
+            <img class="card" src="{{ image.image.url }}" alt="people" style="object-fit: contain; width: 100%;">
+            <a id="delImage" href="{% url 'services:delete_gallery_image' image.id %}" class="text-decoration-none">
+                <span class="badge badge-danger position-absolute m-0 top" style="z-index: 2; right: 10px; top: 10px;">
+                    <i class="mdi mdi-delete text-white"></i>
+                </span>
+            </a>
+
+        </div>
+
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+
+    <div class="row">
+
+    </div>
+
 </div>
 {% endblock content %}
