@@ -1,4 +1,6 @@
 {% extends '_base.html'%}
+{% load static %}
+
 {% block content %}
 
 <header class="masthead" style="background-image: url('static/images/executives.jpg')">
@@ -6,6 +8,12 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
+                    <div class="d-flex flex-row text-center justify-content-center">
+                        <img src="{% static 'images/knust_logo.png' %}" alt="img not found" srcset=""
+                            style="width: 100px; height: 120px;">
+                        <img src="{% static 'images/logo_white.png' %}" alt="img not found" srcset=""
+                            style="width: 120px; height: 120px;">
+                    </div>
                     <h1>KSA</h1>
                     <span class="subheading">KNUST Stedents Activists</span>
                 </div>
@@ -18,25 +26,23 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Post preview-->
-            {% for post in posts %}
-            <div class="post-preview">
+            {% for post in posts|slice:5 %}
+            <div class="post-previesw p-0 m-0">
                 <a href="{% url 'services:post-detail' post.slug %}">
-                    <h2 class="post-title">{{ post.title }}</h2>
-                    <h3 class="post-subtitle">
-                        {{ post.content }}
-                    </h3>
+                    <div>
+                        <h2 class="post-title">{{ post.title }}
+                        </h2>
+                        <span class="text-decoration-none">
+                            {{ post.content|slice:150 | safe }} ...
+                        </span>
+                    </div>
                 </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#!">admin</a>
-                    on {{ post.date_posted }}
-                </p>
             </div>
-            <!-- Divider-->
-            <hr class="my-4" />
+            <hr>
             {% endfor %}
             <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase"
+                    href="{% url 'services:all-post' %}">
                     Older Posts
                     →</a></div>
         </div>
@@ -45,6 +51,20 @@
                 Upcoming Events
                 <hr>
             </h4>
+            <ul class="text-decoration-none">
+                {% for event in events %}
+                <li class="text-decoration-none">
+                    {{ event.title }}
+                    <br>
+                    <div style="font-size: 14px;" class="text-info">
+                        <span>Date: {{ event.date }}</span>
+                        <span>Time: {{ event.time }}</span>
+                    </div>
+
+                </li>
+                <hr>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 

@@ -72,6 +72,23 @@ def add_yeargroup(request):
     })
 
 @staff_member_required
+def add_position(request):
+    if request.method == 'POST':
+        form = PositionForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Position added succesffuly")
+            return redirect('/executives/')
+        else:
+            print("invalid data entry, please try again")
+    else:
+        form = PositionForm()
+
+    return render(request, 'pages/admin/add_position.html', {
+        "form": form,
+    })
+
+@staff_member_required
 def members(request):
     members = Member.objects.all()
     return render(request, 'pages/admin/members.html', {
@@ -140,7 +157,7 @@ def delete_gallery_image(request, id):
     delete_image = image
     delete_image.delete()
     messages.success(request, 'Image succesfully deleted')
-    return redirect("/gallery/images/")
+    return redirect("/admin-gallery/")
 
 
 @staff_member_required
@@ -249,3 +266,10 @@ def gallery(request):
 
 def contact_us(request):
     return render(request, 'pages/contact_us.html')
+
+def all_post(request):
+    posts = Post.objects.all()
+    return render (request, 'pages/all_posts.html', {
+        "posts": posts,
+
+    })

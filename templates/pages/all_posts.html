@@ -1,0 +1,30 @@
+{% extends '_base.html'%}
+{% block content %}
+
+<!-- Main Content-->
+<div class="container">
+    <div class="pt-lg-5 pt-5 mt-lg-5 mt-5 "></div>
+
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            {% for post in posts|slice:"5:" %}
+            <div class="post-previesw p-0 m-0">
+                <a href="{% url 'services:post-detail' post.slug %}">
+                    <div>
+                        <h2 class="post-title">{{ post.title }}
+                        </h2>
+                        <span class="text-decoration-none">
+                            {{ post.content|slice:100 | safe }}
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

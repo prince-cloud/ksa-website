@@ -142,6 +142,25 @@ class YearGroupForm(forms.ModelForm):
                 )
             })
 
+class PositionForm(forms.ModelForm):
+    class Meta:
+        model = Position
+        fields = ('position',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': (
+                    'appearance-none block w-full bg-gray-200 w-100 mw-100'
+                    'text-gray-700 border border-gray-200 '
+                    'focus:outline-none focus:bg-white '
+                    'focus:border-gray-500'
+                    'rounded py-1 px-2 leading-tight '
+                )
+            })
+
 class GalleryForm(forms.ModelForm):
     image = forms.ImageField(
         widget=forms.FileInput(
@@ -174,7 +193,7 @@ class GalleryForm(forms.ModelForm):
                     'rounded py-1 px-2 leading-tight '
                 )
             })
-            
+
 class EventForm(forms.ModelForm):
     date = forms.DateField(
         widget=DateInput,

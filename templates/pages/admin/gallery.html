@@ -18,8 +18,9 @@
     {% for image in images %}
     <div class="col-md-4 grid mb-2">
       <img class="card" src="{{ image.image.url }}" alt="people" style="object-fit: contain; width: 100%;">
-      <a id="delImage" href="{% url 'services:delete_gallery_image' image.id %}" class="text-decoration-none">
-        a Delete
+      <a id="delImage" href="{% url 'services:delete_gallery_image' image.id %}"
+        class="text-decoration-none text-danger">
+        Delete
         <span class="badge badge-danger position-absolute m-0 top bg-danger"
           style="z-index: 2; right: 10px; top: 10px;">
           delete
