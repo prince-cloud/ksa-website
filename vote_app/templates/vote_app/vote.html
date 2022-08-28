@@ -1,0 +1,16 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="container py-5" style="max-width: 680px;">
+    <h2 class="text-center">Welcome to {{ election.name }}</h2>
+    <h1 class="text-center">Kindly pay attention to these rules.</h1>
+
+
+    <section class="py-4 pt-0 text-center">
+        {{ election.rules }}        
+    </section>
+    <section class="py-4 text-center">
+        <a class="btn btn-lg btn-warning" href="{{ election.positions.first.get_vote_url }}">Proceed to Vote</a>
+    </section>
+</div>
+{% endblock %}

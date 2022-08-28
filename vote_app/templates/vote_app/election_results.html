@@ -1,0 +1,60 @@
+{% extends '_base.html' %}
+
+{% block title %}
+Election Results {{ election.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5">
+    <div class="container" style="max-width: 680px;">
+        <h2 class="text-center">Welcome</h2>
+        <h1 class="text-center">Results of {{ election.name}}</h1>
+    </div>
+
+
+    <section class="py-4 pt-0">
+        <div class="container">
+
+            <div class="border bg-white mb-3 p-3 d-flex justify-content-between">
+                <h5>Total Votes cast</h5>
+                <h2>{{ election.get_total_votes }}</h2>
+            </div>
+        </div>
+
+        <div class="container-fluid py-4">
+
+            {% for position in election.positions.all %}
+            <div class=" py-5">
+                <div class="container text-center py-2" style="max-width: 680px;">
+                    <h2>{{ position.name }}</h2>
+                </div>
+
+                <div class="container-lg animate__animated animate__bounceInUp px-0 px-md-unset">
+                    <canvas style=" background: #ddd; height: 70vh; width: 100%;" class="text-white election_canvas"
+                        id="position-{{position.id}}"
+                        data-ended="{% if election.active %}false{% else %}true{% endif %}"
+                        data-title="{{ position.name}} results(2022)" data-url="{{ position.get_results_url }}"
+                        data-id="{{ position.id }}">
+
+                    </canvas>
+                    <div class="text-center">
+                        <h4>Total Votes: <span id="total-votes-{{ position.id}}"> {{ position.get_votes_count }}</span>
+                        </h4>
+                    </div>
+                </div>
+                {% if election.is_ended %}
+                <div class="p-3 text-center">
+                    <h6>Winner</h6>
+                    <h2 class="font-weght-bold">{{ position.winner }} ({{position.winner.total_votes }})</h2>
+                </div>
+                {% endif %}
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+
+</div>
+
+</section>
+</div>
+{% endblock %}

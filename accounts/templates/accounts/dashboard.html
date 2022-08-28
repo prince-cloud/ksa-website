@@ -1,0 +1,94 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="jumbotron bg-dark rounded-0 text-light">
+    <div class="container pb-5">
+        <p>Hello, {{ request.user.first_name }} {{ request.user.last_name }}
+
+            <br>
+            <a href="{% url 'accounts:logout' %}" class="btn btn-sm btn-danger">Log out</a>
+        </p>
+        <h3 class="text-center animate  animate__bounceInUp">Welcome to the</h3>
+        <h1 class="text-center display-4 display-md-2 animate  animate__bounceInUp">{{ election.name }}</h1>
+        {% if election %}
+        {% if request.user.is_superuser %}
+        <div class="row text-center mt-4 mb-4">
+               <div class="col-md-12 d-flex text-center align-items-center justify-content-center">
+                <a class="nav-link active bg-white btn btn-lg mr-3" aria-current="page" href="{{ election.get_results_url }}">Election Results</a>
+                <a class="nav-link active btn btn-danger btn-lg ml-3" aria-current="page" href="{{ election.get_end_url }}">End Election</a>
+               </div>
+        </div>
+        {% endif %}
+        {% endif %}
+
+        <h2 class="text-center lead animate  animate__bounceInUp">Here are your aspirants</h2>
+
+    </div>
+</div>
+<div class="container py-5">
+    <section class="py-4 pt-0">
+
+        <div class="container-fluid py-4">
+            <p class="text-center">
+
+                <a href="{{ election.get_vote_url }}" class="animate  animate__backInUp btn btn-warning btn-xl btn-primary">Vote Now</a>
+            </p>
+            {% if election.is_active %}
+            <p class="text-center font-weight-bold">Voting ends at {{ election.end_date }}</p>
+            {% else %}
+            {% if election.is_ended %}
+            <p class="text-center font-weight-bold text-danger">Sorry voting ended at {{ election.end_date }}</p>
+            {% else %}
+            <p class="text-center font-weight-bold">Voting starts at {{ election.start_date }}</p>
+            {% endif %}
+            {% endif %}
+            <div class="row gap-4">
+
+                {% for position in election.positions.all %}
+                <div class="col-md-12 py-5">
+                    <div class="text-center py-2">
+                        <div class=" container " style="max-width: 680px;">
+
+                            <h2 class="animate  animate__fadeInDown">{{ position.name }}</h2>
+                            <p class="animate  animate__fadeInDown">{{ position.description }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            {% for aspirant in position.aspirants.all %}
+                            <div class="col-sm-6 col-md-4  py-3">
+                                <div class="shadow bg-white animate  animate__fadeInTopRight rounded-5 h-100">
+                                    <div class="card-image" style="height: 200px;">
+                                        <img class="img-default" src="{{ aspirant.picture.url }}" alt="aspirant image" style="object-fit: contain;">
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h4>{{ aspirant.name }}</h4>
+                                        <hr/>
+                                        <p>
+                                            {{ aspirant.description | truncatewords:20}}
+                                        </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="col-12 text-center text-danger">
+                                There are no aspirants now.
+                            </div>
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <p class="text-center">
+
+            <a href="{{ election.get_vote_url }}" class="btn btn-warning btn-xl btn-primary">Vote Now</a>
+        </p>
+    </section>
+</div>
+{% endblock %}

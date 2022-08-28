@@ -1,0 +1,37 @@
+body{
+    height: 100vh;
+    /* background: url(cohk_logo.png); */
+    background-color: rgb(242, 251, 255);
+    background-position: center;
+    background-size: 100px;
+    background-repeat: repeat;
+}
+.img-default{
+    object-fit: cover;
+    object-position: top;
+    height: 100%;
+    width: 100%;
+}
+.logo {
+    height: 70px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.btn-xl {
+    padding: 30px 70px;
+    font-size: 22px;
+    border-radius: 20px;
+}
+@media screen and (min-width: 680px) {
+    .display-md-2{
+        font-size: 90px !important; 
+    }
+    
+}
+.inactive-vote {
+    opacity: 0.5;
+}
+.alert-error{
+    background: rgb(250, 66, 34);
+}

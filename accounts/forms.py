@@ -13,3 +13,6 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('email', 'username',)
+
+class NewPasswordForm(forms.Form):
+    phone_number = forms.CharField(max_length=20)

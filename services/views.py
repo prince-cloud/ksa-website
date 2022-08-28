@@ -19,6 +19,7 @@ def secrete_route(request):
     yeargroup = YearGroup.objects.all()
     events = Event.objects.filter(date__gte = timezone.now())
     outdated_events = Event.objects.filter(date__lte = timezone.now())
+    
 
     return render(request, 'pages/admin/admin_page.html',
     {
@@ -128,7 +129,7 @@ def add_post(request):
         "form": form,
     })
 
-@staff_member_required
+
 def postdetail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     return render (request, "pages/post_detail.html",

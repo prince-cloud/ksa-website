@@ -1,0 +1,129 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="container py-5" style="max-width: 680px;">
+    <h2 class="text-center">Welcome</h2>
+    <h1 class="text-center">Here are your votes</h1>
+    <p class="lead text-center">You can click on change votes to make changes.</p>
+
+
+    <section class="py-4 pt-0">
+
+        <div class="container-fluid py-4">
+
+            <div class="row gap-4">
+                {% for vote in user_vote.aspirant_votes.all %}
+                <div class="col-md-12 py-5">
+                    <div class="text-center py-2">
+                        <h2>{{ vote.position.name }}</h2>
+                        <p>{{ vote.position.description }}</p>
+                    </div>
+
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            {% for aspirant in vote.position.aspirants.all %}
+                            <div class="col-sm-6 col-md-6 py-2 position-relative">
+
+                                <div
+                                    class="shadow bg-white rounded-5 h-100 {% if aspirant != vote.aspirant %}inactive-vote{% endif %}">
+                                    <div class="card-image" style="height: 200px;">
+                                        <img class="img-default" src="{{ aspirant.picture.url }}" alt="aspirant image">
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h4>{{ aspirant.name }}</h4>
+                                        <hr />
+                                        <p>
+                                            {{ aspirant.description | truncatewords:20 }}
+                                        </p>
+                                        {% if aspirant == vote.aspirant  or vote.position.is_yes_or_no %}
+                                        {% if  not vote.position.is_yes_or_no %}
+                                        <p >
+                                            <span class="badge  badge-pill badge-warning text-italic">Currently Selected</span>
+                                        </p>
+                                        {% else %}
+                                        {% if aspirant == vote.aspirant %}
+                                        <p >
+                                            <span class="badge  badge-pill badge-warning text-italic">Yes</span>
+                                        </p>
+                                        {% else %}
+                                        <p >
+                                            <span class="badge  badge-pill badge-warning text-italic">No</span>
+                                        </p>
+                                        {% endif %}
+                                        {% endif %}
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="col-12 text-center text-danger">
+                                There are no aspirants now.
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+            {% if uncompleted_positions %}
+            <div class="row gap-4 justify-content-center">
+                <div class="col-12 text-danger">
+                    <h3>You have not voted for the following positions.</h3>
+                </div>
+                {% for position in uncompleted_positions %}
+                <div class="col-md-12 py-5">
+                    <div class="text-center py-2">
+                        <h2>{{ position.name }}</h2>
+                        <p>{{ position.description }}</p>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            {% for aspirant in position.aspirants.all %}
+                            <div class="col-sm-6 col-md-6 py-2 position-relative">
+
+                                <div class="shadow bg-white rounded-5 h-100 inactive-vote">
+                                    <div class="card-image" style="height: 200px;">
+                                        <img class="img-default" src="{{ aspirant.picture.url }}" alt="aspirant image">
+                                    </div>
+                                    <div class="card-body">
+                                        <h4>{{ aspirant.name }}</h4>
+                                        <hr />
+                                        <p>
+                                            {{ aspirant.description | truncatewords:20}}
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="col-12 text-center text-danger">
+                                There are no aspirants now.
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="py-4 text-center">
+            <p>Do you want to<br> <a class="btn btn-warning d-block btn-lg" href="{{ election.get_vote_url }}">Change
+                    Your Vote</a></p>
+            {% if not uncompleted_positions %}
+            <p>Or <br><a class="btn btn-danger d-block btn-lg" href="{{ user_vote.get_save_url }}">Save Your Vote</a>
+            </p>
+            <p>Once you save your votes, you cannot change it again.</p>
+
+            {% endif %}
+
+        </div>
+    </section>
+</div>
+{% endblock %}

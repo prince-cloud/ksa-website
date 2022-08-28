@@ -1,0 +1,34 @@
+{% extends '_base.html' %}
+{% block content %}
+
+<div class="container py-5" style="max-width: 680px;">
+    <h2 class="text-center text-muted">Cast Your Vote</h2>
+    <h1 class="text-center">{{ position.name }}</h1>
+    {% if position.is_yes_or_no %}
+    {% include 'vote_app/_partials/is_yes_or_no.html' %}
+    {% else %}
+    <div class="row justify-content-center align-items-center py-3">
+
+        {% for aspirant in position.aspirants.all %}
+        <div class="col-sm-6 col-md-6 py-2">
+            <div class="d-flex bg-white flex-column shadow rounded-5 h-100">
+                <div class="card-image" style="height: 200px;">
+                    <img class="img-default" src="{{ aspirant.picture.url }}" alt="aspirant image" style="object-fit: contain;">
+                </div>
+                <div class="card-body h-100 text-center">
+                    <h4>{{ aspirant.name }}</h4>
+                    {% if aspirant == vote.aspirant %}
+                    <p class="badge badge-pill badge-warning text-italic">Currently Selected</p>
+                    {% endif %}
+
+                </div>
+                <div>
+                    <a href="{{ aspirant.get_vote_url }}" class="btn py-3 btn-warning w-100 ">Vote</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

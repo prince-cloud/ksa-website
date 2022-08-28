@@ -1,0 +1,80 @@
+{% extends '_base.html' %}
+
+{% block title %}
+Election Results {{ election.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="container" style="max-width: 680px;">
+        <h2 class="text-center">Here is a list of</h2>
+        <h1 class="text-center">People who have not voted</h1>
+    </div>
+    <div class="container-fluild pt-2">
+        <canvas style=" background: #ddd; max-height: 60vh; width: 100%;" class="text-white election_canvas" id="pie-chart">
+
+        </canvas>
+        <div class="text-center">
+            <h4>Total Voters: <span id="total-votes-{{ position.id}}"> {{ election.voters.count }}</span></h4>
+        </div>
+    </div>
+
+    <section class="py-4 pt-0 bg-white">
+
+        <table class="table table-striped">
+            <thead>
+                <td>#</td>
+                <td>Name</td>
+                <td>Index Number</td>
+                <td>Phone Number</td>
+            </thead>
+            <tbody>
+                {% for user in election.yet_to_vote_users %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ user.get_full_name }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.phone_number }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">
+                        <p class="text-center text-success">Everyone has voted.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </section>
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+<script defer>
+    let config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: ["{{ election.get_total_votes }}", "{{election.yet_to_vote_users.count}}"],
+                borderColor: "#444",
+                backgroundColor: ["green", 'red', 'cyan', 'purple'],
+                colors: ["red", "blue", "cyan", "green"],
+                borderWidth: 2,
+                fill: false,
+                label: "Pie chart of Currently recorded votes"
+            }],
+            labels: ["Voted", "Have not Voted"],
+        },
+        options: {
+            responsive: true
+        }
+    };
+    let chart = new Chart(
+        document.getElementById("pie-chart"), config
+    )
+
+</script>
+{% endblock %}

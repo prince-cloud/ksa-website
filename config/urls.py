@@ -4,8 +4,10 @@ from django.urls import path, include, re_path
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
+    #path('accounts/', include('allauth.urls')),
+    path('accounts/', include('accounts.urls')),
     path('', include('services.urls')),
+    path('elections/', include('vote_app.urls')),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 urlpatterns = urlpatterns + static(

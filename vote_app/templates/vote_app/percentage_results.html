@@ -1,0 +1,83 @@
+{% extends '_base.html' %}
+
+{% block title %}
+Election Results {{ election.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5">
+    <div class="container" style="max-width: 680px;">
+        <h2 class="text-center">Welcome</h2>
+        <h1 class="text-center">Results of {{ election.name}} in percentages</h1>
+    </div>
+
+
+    <section class="py-4 pt-0">
+        <div class="container">
+
+            <div class="border bg-white mb-3 p-3 d-flex justify-content-between">
+                <h5>Total Votes cast</h5>
+                <h2>{{ election.get_total_votes }}</h2>
+            </div>
+        </div>
+
+        <div class="container-fluid py-4 bg-white border">
+            <table class="table table-borderless table-striped">
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Aspirant</th>
+                        <th>Vote  (%)</th>
+                        <!-- <th>Percentage Vote Against (%)</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    {% for position in election.positions.all %}
+                    {% if position.is_yes_or_no %}
+                    <tr>
+                        <td style="vertical-align: middle; text-align: center;" rowspan="2">
+
+                            <h4>{{ position.name }}</h4>
+                        </td>
+                        <td>{{ position.aspirants.first }} (yes)</td>
+                        <td>{{ position.aspirants.first.get_percentage_votes |floatformat:2 }}</td>
+                        <!-- <td>{{ position.aspirants.first.get_percentage_votes_against |floatformat:2 }}</td> -->
+                    </tr>
+                    <tr>
+                        <td>{{ position.aspirants.first.name }} (no)</td>
+                        <td>{{ position.aspirants.first.get_percentage_votes_against |floatformat:2 }}</td>
+                       <!--  <td>{{position.aspirants.first.get_percentage_votes |floatformat:2 }}</td> -->
+                    </tr>
+                    {% else %}
+                    {% for aspirant in position.aspirants.all %}
+                    <tr>
+                        {% if forloop.counter == 1 %}
+                        <td style="vertical-align: middle; text-align: center;"
+                            rowspan="{% if position.is_yes_or_no %}2{% else %}{{ position.aspirants.count }}{% endif %}">
+
+                            <h4>{{ position.name }}</h4>
+                        </td>
+                        {% endif %}
+                        <td>{{ aspirant.name }} </td>
+                        <td>{{ aspirant.get_percentage_votes |floatformat:2 }}</td>
+                       <!--  <td>{{ aspirant.get_percentage_votes_against |floatformat:2 }}</td> -->
+                    </tr>
+
+                    {% endfor %}
+                    {% endif %}
+                    <tr>
+                        <td colspan="4"><hr></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+</div>
+
+</section>
+</div>
+{% endblock %}
