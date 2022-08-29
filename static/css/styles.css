@@ -12069,10 +12069,6 @@ header.masthead:before {
 }
 
 header.masthead .page-heading,
-header.masthead .post-heading,
-header.masthead .site-heading {
-  color: #fff;
-}
 
 header.masthead .page-heading,
 header.masthead .site-heading {

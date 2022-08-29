@@ -78,7 +78,7 @@ class PostImage(models.Model):
 
 class Post(models.Model):
     posted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=200)
     title_image = models.ImageField(upload_to="posts_images/")
     content = RichTextField()
 
