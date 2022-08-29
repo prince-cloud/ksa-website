@@ -21,7 +21,14 @@
                 </a>
             </div>
             <hr>
+            {% empty %}
+            <p>
+                <div class="display-3 text-danger">
+                    Sorry, there are no posts
+                </div>
+            </p>
             {% endfor %}
+
         </div>
 
     </div>
