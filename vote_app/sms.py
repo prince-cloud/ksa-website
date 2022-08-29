@@ -5,7 +5,7 @@ from django.conf import settings
 
 class SmsApi:
     BASE_URL = "https://sms.textcus.com/api/send"
-    API_KEY = settings.SMS_API_KEY
+    API_KEY = "settings.SMS_API_KEY"
 
     def send(self, recipients: List[str], message: str, sender_id: str) -> bool:
         recipients = self.clean_recipients(recipients)

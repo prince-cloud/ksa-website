@@ -219,7 +219,7 @@ CKEDITOR_UPLOAD_PATH = "media/uploads/"
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
-SMS_API_KEY = env("SMS_API_KEY")
+#SMS_API_KEY = env("SMS_API_KEY")
 MNOTIFY_SMS_API_KEY = env("MNOTIFY_SMS_API_KEY")
 
 # email settings
