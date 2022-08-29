@@ -71,7 +71,8 @@ class Command(BaseCommand):
                     #)
 
                 except Exception as e:
-                    self.stdout.write(e)
+                    self.stdout.write(str(e))
+
                     self.stdout.write(f"Error: User already exists {line}")
                 self.stdout.write(f"Logging {line}")
 

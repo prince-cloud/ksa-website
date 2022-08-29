@@ -15,7 +15,7 @@ env = environ.Env(
     EMAIL_PORT = (int, 587),
     EMAIL_USE_TLS = (bool, True),
     MEDIA_ROOT = (str, BASE_DIR / "media"),
-    STATIC_ROOT = (str, BASE_DIR / "static"),
+    STATIC_ROOT = (str, BASE_DIR / "static_root"),
 )
 try:
     environ.Env.read_env(open(BASE_DIR/'.env'))
