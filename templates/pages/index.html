@@ -21,8 +21,18 @@
         </div>
     </div>
 </header> -->
-<div class="jumbotron">
-    <p>Hello world</p>
+<div class="jumbotron text-center"
+    style="background-image: url('static/images/executives.jpg'); background-color:  rgba(0, 0, 0, 0.8); background-blend-mode: overlay; background-repeat: no-repeat; background-size: cover; height: 400px; ">
+    <div class="site-heading">
+        <div class="d-flex flex-row text-center justify-content-center">
+            <img src="{% static 'images/knust_logo.png' %}" alt="img not found" srcset=""
+                style="width: 100px; height: 120px;">
+            <img src="{% static 'images/logo_white.png' %}" alt="img not found" srcset=""
+                style="width: 120px; height: 120px;">
+        </div>
+        <h1 class="text-white display-2">KSA</h1>
+        <h4 class="subheading text-white">KNUST Stedents Activists</h4>
+    </div>
 </div>
 <!-- Main Content-->
 <div class="container">
@@ -31,7 +41,8 @@
             <!-- Post preview-->
             {% for post in posts|slice:5 %}
             <div class="post-previesw p-0 m-0">
-                <a href="{% url 'services:post-detail' post.slug %}">
+                <a href="{% url 'services:post-detail' post.slug %}"
+                    class="text-decoration-none text-dark animate  animate__bounceInUp">
                     <div>
                         <h2 class="post-title">{{ post.title }}
                         </h2>

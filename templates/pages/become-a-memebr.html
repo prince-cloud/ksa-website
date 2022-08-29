@@ -8,141 +8,146 @@ MEMBER REGISTRATION
 
 {% block content %}
 <div class="container">
-    
-<div class="pt-lg-5 pt-5 mt-lg-5 mt-5 "></div>
 
-<div class="row">
-    <form method="post">
+    <div class="pt-lg-5 pt-5 mt-lg-5 mt-5 "></div>
 
-        <div class="pb-3 d-flex flex-column justify-content-center align-items-center">
-            <h2 class="text-center text-bolder text-dark">
-                <Main>Membership Form</Main>
-            </h2>
-            <small class="text-center"> fields marked (*) are mandatory </small>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form method="post">
+
+                <div class="pb-3 d-flex flex-column justify-content-center align-items-center">
+                    <h2 class="text-center text-bolder text-dark">
+                        <Main>Membership Form</Main>
+                    </h2>
+                    <small class="text-center"> fields marked (*) are mandatory </small>
+                </div>
+                {% csrf_token %}
+
+
+                <div class=" bg-gray px-3 px-sm-4 p-md-3 p-lg-5 shadow white-bg">
+                    <div class="row mb-2">
+                        <div class="col-12 col-md-6  shadow-none">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="{{ membership_form.full_name.id_for_label }}">
+                                {{ membership_form.full_name.label }}
+                            </label>
+                            {{ membership_form.full_name }}
+                            {% if membership_form.full_name.errors %}
+                            {% for error in membership_form.full_name.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <div class="col-12 col-md-6  shadow-none">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="{{ membership_form.date_of_birth.id_for_label }}">
+                                Date of Birth
+                            </label>
+                            {{ membership_form.date_of_birth }}
+                            {% if membership_form.date_of_birth.errors %}
+                            {% for error in membership_form.date_of_birth.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                            <span class="text-small" style="font-size: 8; color: rgba(0, 0, 0, 0.411);">format:
+                                dd/mm/yyyy</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-2">
+                        <div class="col-12 col-md-6  shadow-none">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="{{ membership_form.phone_number.id_for_label }}">
+                                {{ membership_form.phone_number.label }}
+                            </label>
+                            {{ membership_form.phone_number }}
+                            {% if membership_form.phone_number.errors %}
+                            {% for error in membership_form.phone_number.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-6  shadow-none">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="{{ membership_form.email_address.id_for_label }}">
+                                {{ membership_form.email_address.label }}
+                            </label>
+                            {{ membership_form.email_address }}
+                            {% if membership_form.email_address.errors %}
+                            {% for error in membership_form.email_address.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-4">
+
+                        <div class="col-12 col-md-6  shadow-none">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="{{ membership_form.programe_of_study.id_for_label }}">
+                                {{ membership_form.programe_of_study.label }}
+                            </label>
+                            {{ membership_form.programe_of_study }}
+                            {% if membership_form.programe_of_study.errors %}
+                            {% for error in membership_form.programe_of_study.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-6  shadow-none">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="{{ membership_form.membership_status.id_for_label }}">
+                                {{ membership_form.membership_status.label }}
+                            </label>
+                            {{ membership_form.membership_status }}
+                            {% if membership_form.membership_status.errors %}
+                            {% for error in membership_form.membership_status.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-4">
+
+                        <div class="col-12 col-md-6  shadow-none">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="{{ membership_form.place_of_residence.id_for_label }}">
+                                {{ membership_form.place_of_residence.label }}
+                            </label>
+                            {{ membership_form.place_of_residence }}
+                            {% if membership_form.place_of_residence.errors %}
+                            {% for error in membership_form.place_of_residence.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-md-6  shadow-none">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="{{ membership_form.name_of_current_hostel.id_for_label }}">
+                                {{ membership_form.name_of_current_hostel.label }}
+                            </label>
+                            {{ membership_form.name_of_current_hostel }}
+                            {% if membership_form.name_of_current_hostel.errors %}
+                            {% for error in membership_form.name_of_current_hostel.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="pb-3 d-flex flex-column justify-content-center align-items-center">
+                        <input class="btn btn-success btn-mg shadow btn-block" type="submit">
+                    </div>
+                </div>
+
+
+            </form>
         </div>
-        {% csrf_token %}
-
-
-        <div class=" bg-gray px-3 px-sm-4 p-md-3 p-lg-5 shadow white-bg">
-            <div class="row mb-2">
-                <div class="col-12 col-md-6  shadow-none">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="{{ membership_form.full_name.id_for_label }}">
-                        {{ membership_form.full_name.label }}
-                    </label>
-                    {{ membership_form.full_name }}
-                    {% if membership_form.full_name.errors %}
-                    {% for error in membership_form.full_name.errors %}
-                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-
-                <div class="col-12 col-md-6  shadow-none">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="{{ membership_form.date_of_birth.id_for_label }}">
-                        Date of Birth 
-                    </label>
-                    {{ membership_form.date_of_birth }}
-                    {% if membership_form.date_of_birth.errors %}
-                    {% for error in membership_form.date_of_birth.errors %}
-                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
-                    <span class="text-small" style="font-size: 8; color: rgba(0, 0, 0, 0.411);">format: dd/mm/yyyy</span>
-                </div>
-            </div>
-            <hr>
-            <div class="row mb-2">
-                <div class="col-12 col-md-6  shadow-none">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="{{ membership_form.phone_number.id_for_label }}">
-                        {{ membership_form.phone_number.label }}
-                    </label>
-                    {{ membership_form.phone_number }}
-                    {% if membership_form.phone_number.errors %}
-                    {% for error in membership_form.phone_number.errors %}
-                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-                <div class="col-12 col-md-6  shadow-none">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="{{ membership_form.email_address.id_for_label }}">
-                        {{ membership_form.email_address.label }}
-                    </label>
-                    {{ membership_form.email_address }}
-                    {% if membership_form.email_address.errors %}
-                    {% for error in membership_form.email_address.errors %}
-                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
-            <hr>
-            <div class="row mb-4">
-
-                <div class="col-12 col-md-6  shadow-none">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="{{ membership_form.programe_of_study.id_for_label }}">
-                        {{ membership_form.programe_of_study.label }}
-                    </label>
-                    {{ membership_form.programe_of_study }}
-                    {% if membership_form.programe_of_study.errors %}
-                    {% for error in membership_form.programe_of_study.errors %}
-                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-                <div class="col-12 col-md-6  shadow-none">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="{{ membership_form.membership_status.id_for_label }}">
-                        {{ membership_form.membership_status.label }}
-                    </label>
-                    {{ membership_form.membership_status }}
-                    {% if membership_form.membership_status.errors %}
-                    {% for error in membership_form.membership_status.errors %}
-                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
-            <hr>
-            <div class="row mb-4">
-
-                <div class="col-12 col-md-6  shadow-none">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="{{ membership_form.place_of_residence.id_for_label }}">
-                        {{ membership_form.place_of_residence.label }}
-                    </label>
-                    {{ membership_form.place_of_residence }}
-                    {% if membership_form.place_of_residence.errors %}
-                    {% for error in membership_form.place_of_residence.errors %}
-                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-                <div class="col-12 col-md-6  shadow-none">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="{{ membership_form.name_of_current_hostel.id_for_label }}">
-                        {{ membership_form.name_of_current_hostel.label }}
-                    </label>
-                    {{ membership_form.name_of_current_hostel }}
-                    {% if membership_form.name_of_current_hostel.errors %}
-                    {% for error in membership_form.name_of_current_hostel.errors %}
-                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
-            <div class="pb-3 d-flex flex-column justify-content-center align-items-center">
-                    <input class="btn btn-success btn-mg shadow btn-block" type="submit">
-            </div>
-        </div>
-
-        
-    </form>
-</div>
+        <div class="col-md-2"></div>
+    </div>
 
 </div>
 {% endblock %}
