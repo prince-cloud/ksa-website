@@ -168,6 +168,7 @@ STATIC_URL = "/static/"
 STATIC_ROOT = env('STATIC_ROOT')
 MEDIA_URL = "/media/"
 MEDIA_ROOT = env('MEDIA_ROOT')
+STATICFILES_DIRS = [BASE_DIR/'static',]
 
 # DJANGO-CRISPY-FORMS CONFIGS
 # ------------------------------------------------------------------------------
