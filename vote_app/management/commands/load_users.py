@@ -58,7 +58,6 @@ class Command(BaseCommand):
                 
                 password = generate_password(length=4)
                 u.set_password(password)
-                print('==== Adding User: ', u)
                 try:
                     u.save()
                     message = f"Hello login to vote at https://knuststudentactivists.org/elections/ with your phone number as username and      password: {password}"
