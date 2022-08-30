@@ -56,13 +56,12 @@ class Command(BaseCommand):
                     phone_number=phone,
                 )
                 
-                password = generate_password(length=8)
+                password = generate_password(length=4)
                 u.set_password(password)
-                print('========= Printing Users ==========')
-                print("User: ", u, "Password: ", password)
+                print('==== Adding User: ', u)
                 try:
                     u.save()
-                    message = f"Hello login to vote at https://ksa.com/elections/ with your phone number as username and      password: {password}"
+                    message = f"Hello login to vote at https://knuststudentactivists.org/elections/ with your phone number as username and      password: {password}"
                     election.voters.add(u)
                     sms.send_message(
                         recipients=[u.phone_number],
