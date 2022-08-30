@@ -64,11 +64,11 @@ class Command(BaseCommand):
                     u.save()
                     message = f"Hello login to vote at https://ksa.com/elections/ with your phone number as username and      password: {password}"
                     election.voters.add(u)
-                    #sms.send_message(
-                    #    recipients=[u.phone_number],
-                    #    message=message,
-                    #    sender="KSA-EC",
-                    #)
+                    sms.send_message(
+                        recipients=[u.phone_number],
+                        message=message,
+                        sender="KSA-EC",
+                    )
 
                 except Exception as e:
                     self.stdout.write(str(e))
