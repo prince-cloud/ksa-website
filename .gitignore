@@ -30,4 +30,4 @@ media
 .env
 .env.json
 
-user.csv
+users.csv
