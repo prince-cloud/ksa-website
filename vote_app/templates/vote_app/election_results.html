@@ -14,6 +14,11 @@ Election Results {{ election.name }}
 
     <section class="py-4 pt-0">
         <div class="container">
+            <div class="row justify-content-end">
+                <h2 class="mr-3">
+                    <a href="{{ election.get_results_percentage_url }}" class="btn btn-lg btn-dark">Show Percentage</a>
+                </h2>
+            </div>
 
             <div class="border bg-white mb-3 p-3 d-flex justify-content-between">
                 <h5>Total Votes cast</h5>

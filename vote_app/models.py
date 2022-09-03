@@ -41,6 +41,9 @@ class Election(models.Model):
     def get_results_url(self) -> str:
         return reverse('vote_app:election-results', kwargs={'election_id': self.pk})
 
+    def get_results_percentage_url(self) -> str:
+        return reverse('vote_app:election-percentage-results', kwargs={'election_id': self.pk})
+
     def get_vote_url(self) -> str:
         return reverse('vote_app:vote', kwargs={'election_id': self.pk})
     
