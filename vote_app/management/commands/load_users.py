@@ -56,7 +56,7 @@ class Command(BaseCommand):
                     phone_number=phone,
                 )
                 
-                password = generate_password(length=4)
+                password = generate_password(length=6)
                 u.set_password(password)
                 try:
                     u.save()

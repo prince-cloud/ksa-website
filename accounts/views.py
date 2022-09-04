@@ -26,14 +26,18 @@ def get_new_password(request):
             cd = form.cleaned_data
             phone_number: str = cd['phone_number']
             phone_number = phone_number.strip()
-            member = get_object_or_404(User, username=phone_number)
-            new_password = generate_password(6)
+            try:
+                member = get_object_or_404(User, username=phone_number)
+            except:
+                messages.error(request, "Sorry, you number does not exist, please contact your EC")
+                return redirect('/accounts/new-password/')
+            new_password = generate_password(7)
             member.set_password(new_password)
             member.save()
             sms = Sms()
 
             messages.success(request, "Password reset successful. An sms has been sent to your phone containing the new password")
-            sms.send_message(recipients=[member.phone_number],message= f"Password Reset Successful. Login at https://ksa.com/elections/ with        password: {new_password}", sender='KSA-EC')
+            sms.send_message(recipients=[member.phone_number],message= f"Password Reset Successful. Login at https://https://knuststudentactivists.org/elections/ with        password: {new_password}", sender='KSA-EC')
             return redirect("/elections/")
     else:
         form = NewPasswordForm()
