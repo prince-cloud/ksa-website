@@ -31,13 +31,23 @@
                 style="width: 120px; height: 120px;">
         </div>
         <h1 class="text-white display-2">KSA</h1>
-        <h4 class="subheading text-white">KNUST Students Activists</h4>
+        <h4 class="subheading text-white">KNUST Student Activists</h4>
+
+
     </div>
 </div>
 <!-- Main Content-->
 <div class="container">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="mb-4 pb-4 text-center">
+                <h2 class="post-title">
+                    2021/2022 Elections
+                </h2>
+                <a class="btn btn-info btn-lg btn-block" href="{% url 'vote_app:elections' %}">
+                    Visit Portal
+                </a>
+            </div>
             <!-- Post preview-->
             {% for post in posts|slice:5 %}
             <div class="post-previesw p-0 m-0">
