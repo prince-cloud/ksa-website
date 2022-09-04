@@ -27,7 +27,7 @@ def get_new_password(request):
             phone_number: str = cd['phone_number']
             phone_number = phone_number.strip()
             member = get_object_or_404(User, username=phone_number)
-            new_password = generate_password(8)
+            new_password = generate_password(6)
             member.set_password(new_password)
             member.save()
             sms = Sms()
